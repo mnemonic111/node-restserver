@@ -15,6 +15,7 @@ process.env.NOVE_ENV = process.env.NOVE_ENV || 'dev';
 //=====================
 let urlDB;
 
+console.log(`Cadena de conexion: ${process.env.NOVE_ENV}`);
 if (process.env.NOVE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cafe';
 } else {
