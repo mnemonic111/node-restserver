@@ -15,7 +15,7 @@ process.env.NOVE_ENV = process.env.NOVE_ENV === 'dev';
 //=====================
 let urlDB;
 
-if (process.env.NOVE_ENV || 'dev') {
+if (process.env.NOVE_ENV !== 'production') {
     urlDB = 'mongodb://localhost:27017/cafe';
 } else {
     urlDB = 'mongodb+srv://admin:131184ma@cluster0-rg884.mongodb.net/cafe';
