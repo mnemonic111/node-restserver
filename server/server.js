@@ -6,15 +6,16 @@ require('./routes/usuario');
 
 const app = express();
 
-
 //Configuracion de body-parser, para poder leer payload de las peticiones post
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
  // parse application/json
 app.use(bodyParser.json());
 
-//Aniadimos las rutas de usuarios.
-app.use( require('./routes/usuario') );
+
+//Aniadimos todas las rutas.
+app.use ( require('./routes/index') );
+
 
  
 //Conexion a la BBDD y configuraciones necesarias.

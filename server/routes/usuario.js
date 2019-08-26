@@ -7,13 +7,20 @@ const bcrypt = require('bcrypt');
 //JS debería de tener por defecto, para objetos y demas.
 const _ = require('underscore'); 
 
+
 //Importamos el modelo de Usuario
 //Ponemos la U en mayusucla por conveccion, ya que se aqui se crearan clases.
 const Usuario = require('../models/usuario');
 
+//Importamos los middlewares personalizados
+const { verificaToken, verificaAdmin } = require('../middlewares/autenticacion');
+
 const app = express();
 
-app.get('/usuario', function (req, res) { 
+/**
+ * Devuelve los usuarios.
+ */
+app.get('/usuario', verificaToken ,(req, res) => { 
 
     //De cara a la paginacion, vamos a implementar el desde hasta . 
     let desde = Number(req.query.desde || 0);
@@ -63,7 +70,10 @@ app.get('/usuario', function (req, res) {
     //res.json('get Usuario');
 });
 
-app.post('/usuario', function (req, res) { 
+/**
+ * Crea un nuevo usuario.
+ */
+app.post('/usuario', [verificaToken, verificaAdmin], (req, res) => { 
     //Debido a que vamos a crear un RESTServer , podemos cambiar el send por json.
     //El cual convierte la información automaticamente a JSON.
 
@@ -104,7 +114,7 @@ app.post('/usuario', function (req, res) {
 
 //Actualizar un usuario, para marcar un parametro por la URL se usa de la siguiente manera:
 // :id
-app.put('/usuario/:id', function (req, res) { 
+app.put('/usuario/:id', [verificaToken, verificaAdmin], (req, res) => { 
     //Para recibir el parametro se puede realizar de la siguiente manera:
     let idUsuario = req.params.id;
 
@@ -143,8 +153,10 @@ app.put('/usuario/:id', function (req, res) {
 });
 
 
-
-app.delete('/usuario/:id', function (req, res) { 
+/**
+ * Elimina logicamente un usuario
+ */
+app.delete('/usuario/:id', [verificaToken,  verificaAdmin], (req, res) => { 
 
     let idUsuario = req.params.id;
     //Eliminado lógico , que es el que se va a realizar.
