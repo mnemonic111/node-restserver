@@ -20,6 +20,7 @@ app.use( require('./routes/usuario') );
 //Conexion a la BBDD y configuraciones necesarias.
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
+console.log(`MongoDB-Uri: ${process.env.URLDB}`);
 mongoose.connect( process.env.URLDB ,{useNewUrlParser: true})
 .then( ok => {
     console.log('Conexión BBDD realizada con Exito.');
@@ -28,5 +29,5 @@ mongoose.connect( process.env.URLDB ,{useNewUrlParser: true})
 });
 
 app.listen(process.env.PORT, () => {
-    console.log('Escchando en el puerto ', process.env.PORT);
+    console.log('Escuchando en el puerto ', process.env.PORT);
 });
