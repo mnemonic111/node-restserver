@@ -34,4 +34,4 @@ process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
 //=====================
 // Seed de autenticacion
 //=====================
-process.env.SEED = process.env.SEED  || 'este-es-el-seed-desarrollo';
+process.env.SEED = new Buffer(process.env.SEED).toString('base64') || 'este-es-el-seed-desarrollo';
