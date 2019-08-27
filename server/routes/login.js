@@ -54,7 +54,7 @@ app.post('/login',  (req, res) => {
         //Generamos el token para el usuario.
         let token = jwt.sign({
             usuario: usuarioBD
-        }, 'este-es-el-seed-desarrollo', {expiresIn: process.env.CADUCIDAD_TOKEN}); //Expira en 30 dias.
+        }, process.env.SEED, {expiresIn: process.env.CADUCIDAD_TOKEN}); //Expira en 30 dias.
 
 
         //Si todo es correcto y no hemos salido de la ejecucion, vamos a generar el token.
